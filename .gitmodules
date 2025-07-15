@@ -1,0 +1,3 @@
+[submodule "artconnects"]
+	path = artconnects
+	url = https://github.com/kn4792/art-connects.git
