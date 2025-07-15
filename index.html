@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects Hub</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            width: 33%;
+            background: #1a1a1a;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .project-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: #333;
+            color: white;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .project-btn:hover {
+            background: #444;
+            transform: translateX(5px);
+        }
+
+        .content {
+            width: 67%;
+            height: 100vh;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2 style="color: white;">My Projects</h2>
+        <button class="project-btn" onclick="loadProject('https://kn4792.github.io/world-map/')">World Map</button>
+        <button class="project-btn" onclick="loadProject('https://kn4792.github.io/art-connects/')">Art Connects</button>
+    </div>
+
+    <div class="content">
+        <iframe id="projectFrame" src="https://kn4792.github.io/world-map/"></iframe>
+    </div>
+
+    <script>
+        function loadProject(projectURL) {
+            document.getElementById('projectFrame').src = projectURL;
+        }
+    </script>
+</body>
+</html>
