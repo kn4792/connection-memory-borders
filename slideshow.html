@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slideshow</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+    }
+
+    .slideshow-container {
+      max-width: 800px;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .slide img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    /* Navigation buttons */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 3px;
+      user-select: none;
+      transform: translateY(-50%);
+    }
+
+    .prev { left: 0; }
+    .next { right: 0; }
+
+    .prev:hover, .next:hover {
+      background: rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="slideshow-container">
+    <!-- Replace with your slideshow images -->
+    <div class="slide"><img src="images/slideshow/img1.jpg" alt="Slide 1"></div>
+    <div class="slide"><img src="images/slideshow/img2.jpg" alt="Slide 2"></div>
+    <div class="slide"><img src="images/slideshow/img3.jpg" alt="Slide 3"></div>
+    <div class="slide"><img src="images/slideshow/img4.jpg" alt="Slide 4"></div>
+    <div class="slide"><img src="images/slideshow/img5.jpg" alt="Slide 5"></div>
+    <div class="slide"><img src="images/slideshow/img6.jpg" alt="Slide 6"></div>
+    <div class="slide"><img src="images/slideshow/img8.jpg" alt="Slide 7"></div>
+    <div class="slide"><img src="images/slideshow/img9.jpg" alt="Slide 8"></div>
+
+    <!-- Navigation arrows -->
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+
+  <script>
+    let slideIndex = 0;
+    showSlides(slideIndex);
+
+    function changeSlide(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+      const slides = document.getElementsByClassName("slide");
+      if (n >= slides.length) { slideIndex = 0; }
+      if (n < 0) { slideIndex = slides.length - 1; }
+
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[slideIndex].style.display = "block";
+    }
+
+    // Auto slideshow every 5 seconds
+    setInterval(() => { changeSlide(1); }, 5000);
+  </script>
+</body>
+</html>
