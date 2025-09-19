@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artist Bios and Statement</title>
+  <style>
+    /* Load custom font */
+    @font-face {
+      font-family: 'EditorialNew-Regular';
+      src: url('fonts/EditorialNew-Regular.woff2') format('woff2'),
+           url('fonts/EditorialNew-Regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'EditorialNew-Regular', serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden; /* prevent sideways scroll */
+    }
+
+    /* Statement image */
+    .statement {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .statement img {
+      width: 55%;
+      height: auto;
+      display: block;
+    }
+
+    /* Overlay image (parallax) */
+    .overlay-img {
+      position: absolute;
+      right: 12%;
+      top: 20%;
+      width: 65%;  
+      max-width: 500px;
+      height: auto;
+      border-radius: 8px;
+      z-index: 2;
+      transform: translateZ(0);
+    }
+
+    /* Two-column bios */
+    .bios {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 60px auto;
+      max-width: 1000px;
+    }
+
+    .bio-col {
+      flex: 1;
+      font-size: 20px;
+      line-height: 1.6;
+      text-align: justify;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Statement image with overlay -->
+  <div class="statement">
+    <img src="images/StatementA3-1.png" alt="Artist Statement">
+    <img src="images/img1.jpg" class="overlay-img" id="parallax-img" alt="Artist Image">
+  </div>
+
+  <!-- Bios -->
+  <div class="bios">
+    <div class="bio-col">
+      <p><strong>Rubab</strong> is a writer, researcher and artist pursuing a master’s degree at HSE Moscow in “Critical
+      Media Studies”. Her artistic endeavors are generally in the genre of sci-fi, speculative fiction,
+      and digital curation. Her works reflect her interest in culture theory, diasporic studies, and
+      digital humanities.</p>   
+    </div>
+    <div class="bio-col">
+      <p><strong>Konain</strong> is an inter-disciplinary artist, data-scientist, and educator. Their work and research
+      explore themes of human history, migration, and languages. With their current graduate
+      studies in information science, they utilize mapping to visualize and tell stories.</p>
+    </div>
+  </div>
+
+  <script>
+    // Parallax effect for overlay image
+    const img = document.getElementById('parallax-img');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      img.style.transform = `translateY(${scrollY * 0.4}px)`; // scroll slower
+    });
+  </script>
+</body>
+</html>
