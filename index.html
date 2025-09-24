@@ -116,6 +116,87 @@
       }
     }
 
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column; /* Stack sidebar and content vertically */
+        height: auto;
+        overflow-y: auto; /* Enable vertical scrolling */
+      }
+
+      .sidebar {
+        width: 100%; /* Full width on mobile */
+        height: auto; /* Auto height */
+        max-height: 50vh; /* Maximum height for sidebar */
+        border-right: none;
+        border-bottom: 1px solid #222;
+        flex-shrink: 0; /* Prevent shrinking */
+      }
+
+      .nav-item {
+        min-height: 60px; /* Smaller height on mobile */
+        padding: 15px 20px;
+        font-size: clamp(0.9rem, 4vw, 1.3rem); /* Larger font relative to viewport */
+      }
+
+      .nav-item:not(:last-child)::after {
+        left: 10%;
+        right: 10%;
+      }
+
+      .main-content {
+        width: 100%; /* Full width on mobile */
+        height: 50vh; /* Fixed height for content */
+        min-height: 300px; /* Minimum height */
+      }
+
+      .image-container {
+        max-width: 95%;
+        max-height: 95%;
+      }
+
+      .image-container img {
+        max-height: 45vh;
+      }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+      .sidebar {
+        max-height: 55vh; /* More space for buttons on very small screens */
+      }
+
+      .nav-item {
+        min-height: 55px;
+        padding: 12px 15px;
+        font-size: clamp(0.8rem, 4.5vw, 1.1rem);
+      }
+
+      .main-content {
+        height: 45vh;
+        min-height: 250px;
+      }
+
+      .image-container img {
+        max-height: 40vh;
+      }
+    }
+
+    /* Very small screens (foldables, etc.) */
+    @media (max-height: 600px) and (max-width: 768px) {
+      .sidebar {
+        max-height: 60vh; /* More space for sidebar on short screens */
+      }
+      
+      .nav-item {
+        min-height: 50px; /* Even smaller buttons */
+        padding: 10px 15px;
+      }
+      
+      .main-content {
+        height: 40vh;
+      }
+    }
 
   </style>
 </head>
