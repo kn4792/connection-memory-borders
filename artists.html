@@ -89,20 +89,42 @@
       word-wrap: break-word;
     }
 
-    /* Mobile Styles */
-    @media (max-width: 768px) {
+    /* Zoom-friendly adjustments (trigger on zoom but keep desktop layout) */
+    @media (max-width: 1000px) {
+      /* Slight adjustments for zoomed view but maintain desktop layout */
+      .statement img:first-child {
+        width: 65%; /* Slightly larger when zoomed */
+      }
+      
+      .overlay-img {
+        width: 25%; /* Slightly smaller when zoomed */
+      }
+      
+      .bios {
+        gap: 30px;
+        padding: 0 30px; /* More padding when zoomed */
+      }
+      
+      .bio-col {
+        font-size: 16px; /* Slightly smaller text when zoomed */
+      }
+    }
+
+    /* Only apply mobile layout for actual mobile/touch devices */
+    @media (max-width: 768px) and (pointer: coarse), 
+           (max-width: 768px) and (hover: none) {
       .statement {
         min-height: 40vh;
         margin-top: 10px;
       }
       
       .statement img:first-child {
-        width: 95%; /* Much wider on mobile */
-        max-width: 95%; /* Prevent overflow */
+        width: 95%;
+        max-width: 95%;
       }
       
       .overlay-img {
-        width: 55%; /* Larger relative size on mobile */
+        width: 35%;
         max-width: 120px;
         right: 5%;
         top: 10%;
@@ -118,7 +140,7 @@
       .bio-col {
         flex: 1 1 100%;
         max-width: 100%;
-        font-size: 16px; /* Slightly smaller for mobile */
+        font-size: 16px;
         line-height: 1.5;
       }
       
@@ -127,12 +149,12 @@
       }
       
       .contact-info a {
-        font-size: 16px; /* Larger tap target */
+        font-size: 16px;
       }
     }
 
-    /* Small mobile devices */
-    @media (max-width: 480px) {
+    /* Small mobile devices - touch only */
+    @media (max-width: 480px) and (pointer: coarse) {
       .statement img:first-child {
         width: 98%;
         max-width: 98%;
@@ -148,6 +170,24 @@
       .bio-col {
         font-size: 15px;
         line-height: 1.4;
+      }
+    }
+
+    /* Alternative: Use device-width for more reliable mobile detection */
+    @media (max-device-width: 768px) {
+      /* This targets physical mobile devices, not zoomed desktop */
+      .statement img:first-child {
+        width: 95%;
+        max-width: 95%;
+      }
+      
+      .bios {
+        flex-direction: column;
+      }
+      
+      .bio-col {
+        flex: 1 1 100%;
+        max-width: 100%;
       }
     }
   </style>

@@ -47,6 +47,7 @@
       word-wrap: break-word;
       overflow-wrap: break-word;
       hyphens: auto; /* Better text breaking */
+      
     }
 
     .nav-item:hover {
@@ -116,27 +117,28 @@
       }
     }
 
-    /* Mobile Styles */
-    @media (max-width: 768px) {
+    /* Alternative: Use device-width for more reliable mobile detection */
+    @media (max-device-width: 768px) {
       body {
-        flex-direction: column; /* Stack sidebar and content vertically */
+        flex-direction: column;
         height: auto;
-        overflow-y: auto; /* Enable vertical scrolling */
+        overflow-y: auto;
       }
 
       .sidebar {
-        width: 100%; /* Full width on mobile */
-        height: auto; /* Auto height */
-        max-height: 50vh; /* Maximum height for sidebar */
+        width: 100%;
+        height: auto;
+        max-height: 50vh;
         border-right: none;
         border-bottom: 1px solid #222;
-        flex-shrink: 0; /* Prevent shrinking */
+        flex-shrink: 0;
       }
 
       .nav-item {
-        min-height: 60px; /* Smaller height on mobile */
+        min-height: 60px;
         padding: 15px 20px;
-        font-size: clamp(0.9rem, 4vw, 1.3rem); /* Larger font relative to viewport */
+        font-size: clamp(0.9rem, 4vw, 1.3rem);
+        flex: 0 0 auto;
       }
 
       .nav-item:not(:last-child)::after {
@@ -145,9 +147,9 @@
       }
 
       .main-content {
-        width: 100%; /* Full width on mobile */
-        height: 50vh; /* Fixed height for content */
-        min-height: 300px; /* Minimum height */
+        width: 100%;
+        height: 50vh;
+        min-height: 300px;
       }
 
       .image-container {
@@ -160,10 +162,29 @@
       }
     }
 
-    /* Small mobile devices */
-    @media (max-width: 480px) {
+    /* Fallback: Use both conditions for safest mobile detection */
+    @media (max-width: 768px) and (orientation: portrait), 
+           (max-width: 768px) and (max-aspect-ratio: 1/1) {
+      /* This will only trigger on actual mobile devices in portrait or square aspect ratios */
+    }
+
+    /* Zoom-friendly styles that work for both desktop and mobile */
+    @media (max-width: 1000px) {
+      /* This will trigger on zoom but keep side-by-side layout */
+      .nav-item {
+        font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+        padding: 0 15px;
+      }
+      
       .sidebar {
-        max-height: 55vh; /* More space for buttons on very small screens */
+        overflow-y: auto; /* Allow scrolling when zoomed */
+      }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) and (hover: none) {
+      .sidebar {
+        max-height: 55vh;
       }
 
       .nav-item {
@@ -179,22 +200,6 @@
 
       .image-container img {
         max-height: 40vh;
-      }
-    }
-
-    /* Very small screens (foldables, etc.) */
-    @media (max-height: 600px) and (max-width: 768px) {
-      .sidebar {
-        max-height: 60vh; /* More space for sidebar on short screens */
-      }
-      
-      .nav-item {
-        min-height: 50px; /* Even smaller buttons */
-        padding: 10px 15px;
-      }
-      
-      .main-content {
-        height: 40vh;
       }
     }
 
