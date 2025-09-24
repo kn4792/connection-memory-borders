@@ -46,26 +46,26 @@
       justify-content: center;
       margin-top: 20px;
       position: relative;
-      min-height: 80vh; /* Reduced since we don't need extra space for parallax */
+      min-height: 60vh;
     }
 
     .statement img:first-child {
       width: 55%;
       height: auto;
       display: block;
+      max-width: 800px;
     }
 
-    /* Overlay image - STATIC (scrolls with page) */
+    /* Overlay image - Desktop */
     .overlay-img {
-      position: absolute; /* Changed to absolute - scrolls with content */
-      right: 10%; /* Position relative to statement container */
-      top: 15%;   /* Position relative to statement container */
-      width: 30%; /* Size relative to statement container */
+      position: absolute;
+      right: 10%;
+      top: 15%;
+      width: 30%;
       max-width: 300px;
       height: auto;
-      border-radius: 8px; 
+      border-radius: 8px;
       z-index: 2;
-      /* Removed will-change and transform properties */
     }
 
     /* Two-column bios */
@@ -89,33 +89,31 @@
       word-wrap: break-word;
     }
 
-    /* Zoom-friendly adjustments (trigger on zoom but keep desktop layout) */
+    /* Zoom-friendly adjustments */
     @media (max-width: 1000px) {
-      /* Slight adjustments for zoomed view but maintain desktop layout */
       .statement img:first-child {
-        width: 65%; /* Slightly larger when zoomed */
+        width: 65%;
       }
       
       .overlay-img {
-        width: 25%; /* Slightly smaller when zoomed */
+        width: 25%;
       }
       
       .bios {
         gap: 30px;
-        padding: 0 30px; /* More padding when zoomed */
+        padding: 0 30px;
       }
       
       .bio-col {
-        font-size: 16px; /* Slightly smaller text when zoomed */
+        font-size: 16px;
       }
     }
 
-    /* Only apply mobile layout for actual mobile/touch devices */
-    @media (max-width: 768px) and (pointer: coarse), 
-           (max-width: 768px) and (hover: none) {
+    /* Mobile layout for touch devices */
+    @media (max-width: 768px) and (pointer: coarse) {
       .statement {
-        min-height: 40vh;
-        margin-top: 10px;
+        min-height: 50vh;
+        margin-top: 15px;
       }
       
       .statement img:first-child {
@@ -123,17 +121,18 @@
         max-width: 95%;
       }
       
+      /* LARGER OVERLAY IMAGE ON MOBILE */
       .overlay-img {
-        width: 45%;
-        max-width: 200px;
-        min-width: 150px;
+        width: 55%; /* Increased from 35% */
+        max-width: 250px; /* Increased from 120px */
+        min-width: 180px; /* Ensure minimum size */
         right: 5%;
         top: 10%;
       }
       
       .bios {
         flex-direction: column;
-        gap: 30px;
+        gap: 25px;
         margin: 30px auto;
         padding: 0 15px;
       }
@@ -154,16 +153,22 @@
       }
     }
 
-    /* Small mobile devices - touch only */
+    /* Small mobile devices */
     @media (max-width: 480px) and (pointer: coarse) {
+      .statement {
+        min-height: 45vh;
+      }
+      
       .statement img:first-child {
         width: 98%;
         max-width: 98%;
       }
       
+      /* EVEN LARGER OVERLAY ON SMALL PHONES */
       .overlay-img {
-        width: 40%;
-        max-width: 100px;
+        width: 60%; /* Increased from 40% */
+        max-width: 220px; /* Increased from 100px */
+        min-width: 150px;
         right: 3%;
         top: 8%;
       }
@@ -174,12 +179,24 @@
       }
     }
 
-    /* Alternative: Use device-width for more reliable mobile detection */
+    /* Tablet devices */
+    @media (max-width: 1024px) and (pointer: coarse) {
+      .overlay-img {
+        width: 35%;
+        max-width: 250px;
+      }
+    }
+
+    /* Alternative: Use device-width for mobile detection */
     @media (max-device-width: 768px) {
-      /* This targets physical mobile devices, not zoomed desktop */
       .statement img:first-child {
         width: 95%;
         max-width: 95%;
+      }
+      
+      .overlay-img {
+        width: 55%;
+        max-width: 250px;
       }
       
       .bios {
@@ -191,10 +208,18 @@
         max-width: 100%;
       }
     }
+
+    /* High-density screens (Retina displays) */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .overlay-img {
+        /* Ensure crisp image on high-DPI screens */
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
+    }
   </style>
 </head>
 <body>
-
   <!-- Statement image with overlay -->
   <div class="statement">
     <img src="images/StatementA3-1.png" alt="Artist Statement">
@@ -219,13 +244,17 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // No scroll event listener needed - image scrolls naturally with the page
       const img = document.getElementById('overlay-img');
       
-      // Optional: Just for debugging/logging
+      // Debugging: log overlay image size
       window.addEventListener('resize', () => {
-        console.log('Overlay image width:', img.offsetWidth + 'px');
+        console.log('Overlay image size:', img.offsetWidth + 'px × ' + img.offsetHeight + 'px');
       });
+      
+      // Initial log
+      setTimeout(() => {
+        console.log('Initial overlay size:', img.offsetWidth + 'px × ' + img.offsetHeight + 'px');
+      }, 100);
     });
   </script>
 </body>

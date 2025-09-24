@@ -39,15 +39,15 @@
       padding: 0 20px;
       color: white;
       text-decoration: none;
-      font-size: clamp(1rem, 2vw, 1.5rem); /* Responsive font size */
+      font-size: clamp(1rem, 2vw, 1.5rem);
       letter-spacing: 0.5px;
       transition: all 0.4s ease;
       position: relative;
       text-align: center;
       word-wrap: break-word;
       overflow-wrap: break-word;
-      hyphens: auto; /* Better text breaking */
-      
+      hyphens: auto;
+      min-height: 60px; /* Ensure minimum height */
     }
 
     .nav-item:hover {
@@ -64,12 +64,6 @@
       right: 15%;
       height: 1px;
       background: #333;
-    }
-
-    .nav-item-content {
-      text-align: center;
-      width: 100%;
-      line-height: 1.3; /* Better line spacing for wrapped text */
     }
 
     .main-content {
@@ -104,11 +98,28 @@
       object-fit: contain;
     }
 
-    /* Media query for very high zoom levels */
-    @media (max-width: 768px) {
+    /* Zoom-friendly adjustments - KEEP SIDE-BY-SIDE LAYOUT */
+    @media (max-width: 1000px) {
+      /* Minor adjustments for zoom but maintain desktop layout */
       .nav-item {
+        font-size: clamp(0.9rem, 1.8vw, 1.4rem);
         padding: 0 15px;
-        font-size: clamp(0.9rem, 3vw, 1.3rem);
+      }
+      
+      .sidebar {
+        min-width: 250px; /* Prevent sidebar from getting too narrow */
+      }
+      
+      .main-content {
+        min-width: 500px; /* Prevent content area from getting too narrow */
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* Only adjust font sizes, don't change layout */
+      .nav-item {
+        font-size: clamp(0.8rem, 1.6vw, 1.3rem);
+        padding: 0 12px;
       }
       
       .nav-item:not(:last-child)::after {
@@ -117,8 +128,9 @@
       }
     }
 
-    /* Alternative: Use device-width for more reliable mobile detection */
-    @media (max-device-width: 768px) {
+    /* MOBILE LAYOUT - ONLY FOR TOUCH DEVICES */
+    @media (max-width: 768px) and (pointer: coarse), 
+           (max-width: 768px) and (hover: none) {
       body {
         flex-direction: column;
         height: auto;
@@ -162,27 +174,10 @@
       }
     }
 
-    /* Fallback: Use both conditions for safest mobile detection */
-    @media (max-width: 768px) and (orientation: portrait), 
-           (max-width: 768px) and (max-aspect-ratio: 1/1) {
-      /* This will only trigger on actual mobile devices in portrait or square aspect ratios */
-    }
+    /* REMOVED the problematic max-device-width media query */
 
-    /* Zoom-friendly styles that work for both desktop and mobile */
-    @media (max-width: 1000px) {
-      /* This will trigger on zoom but keep side-by-side layout */
-      .nav-item {
-        font-size: clamp(0.8rem, 1.5vw, 1.2rem);
-        padding: 0 15px;
-      }
-      
-      .sidebar {
-        overflow-y: auto; /* Allow scrolling when zoomed */
-      }
-    }
-
-    /* Small mobile devices */
-    @media (max-width: 480px) and (hover: none) {
+    /* Small mobile devices - TOUCH ONLY */
+    @media (max-width: 480px) and (pointer: coarse) {
       .sidebar {
         max-height: 55vh;
       }
@@ -203,6 +198,18 @@
       }
     }
 
+    /* Nuclear option: Completely disable mobile layout if still having issues */
+    /*
+    @media (max-width: 768px) {
+      .sidebar {
+        overflow-y: auto;
+      }
+      .nav-item {
+        min-height: 70px;
+        flex-shrink: 0;
+      }
+    }
+    */
   </style>
 </head>
 <body>
@@ -212,7 +219,6 @@
     <a class="nav-item" href="https://kn4792.github.io/world-map/">World Map</a>
     <a class="nav-item" href="https://kn4792.github.io/art-connects/">Art Connects</a>
     <a class="nav-item" href="https://kn4792.github.io/recognition/mariana.html">Recognition</a>
-    
   </div>
 
   <div class="main-content">
