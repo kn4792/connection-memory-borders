@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Homepage</title>
   <style>
     @font-face {
@@ -133,24 +133,25 @@
            (max-width: 768px) and (hover: none) {
       body {
         flex-direction: column;
-        height: auto;
-        overflow-y: auto;
+        height: 100vh; /* Changed from auto to 100vh */
+        overflow: hidden; /* Changed from auto to hidden */
       }
 
       .sidebar {
         width: 100%;
-        height: auto;
-        max-height: 50vh;
+        height: 40%; /* Adjusted height percentage */
+        max-height: none; /* Removed max-height constraint */
         border-right: none;
         border-bottom: 1px solid #222;
         flex-shrink: 0;
+        overflow-y: auto; /* Added scroll if needed */
       }
 
       .nav-item {
         min-height: 60px;
         padding: 15px 20px;
         font-size: clamp(0.9rem, 4vw, 1.3rem);
-        flex: 0 0 auto;
+        flex: 1; /* Changed from 0 0 auto to 1 for equal distribution */
       }
 
       .nav-item:not(:last-child)::after {
@@ -160,26 +161,34 @@
 
       .main-content {
         width: 100%;
-        height: 50vh;
-        min-height: 300px;
+        height: 60%; /* Adjusted height percentage */
+        min-height: 0; /* Removed fixed min-height */
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Ensured centering */
       }
 
       .image-container {
         max-width: 95%;
         max-height: 95%;
+        width: 100%; /* Added to ensure full width */
+        display: flex;
+        justify-content: center; /* Ensured centering */
       }
 
       .image-container img {
-        max-height: 45vh;
+        max-height: 100%; /* Changed from 45vh to 100% */
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        object-fit: contain; /* Ensured proper fitting */
       }
     }
-
-    /* REMOVED the problematic max-device-width media query */
 
     /* Small mobile devices - TOUCH ONLY */
     @media (max-width: 480px) and (pointer: coarse) {
       .sidebar {
-        max-height: 55vh;
+        height: 45%; /* Adjusted height for smaller screens */
       }
 
       .nav-item {
@@ -189,27 +198,24 @@
       }
 
       .main-content {
-        height: 45vh;
-        min-height: 250px;
+        height: 55%; /* Adjusted height for smaller screens */
       }
 
       .image-container img {
-        max-height: 40vh;
+        max-height: 100%; /* Ensured full height */
       }
     }
 
-    /* Nuclear option: Completely disable mobile layout if still having issues */
-    /*
-    @media (max-width: 768px) {
+    /* Additional fix for very small screens */
+    @media (max-width: 360px) and (pointer: coarse) {
       .sidebar {
-        overflow-y: auto;
+        height: 50%; /* Further adjustment for very small screens */
       }
-      .nav-item {
-        min-height: 70px;
-        flex-shrink: 0;
+      
+      .main-content {
+        height: 50%; /* Further adjustment for very small screens */
       }
     }
-    */
   </style>
 </head>
 <body>
